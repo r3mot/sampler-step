@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { useSequenceContext } from "../../context/SequenceProvider";
 import styles from "./Sequencer.module.css";
 
@@ -6,11 +5,6 @@ export const Sequencer = () => {
   const { numBeats, samples, steps } = useSequenceContext();
   const rows = Array.from(Array(samples.length).keys());
   const cols = Array.from(Array(numBeats).keys());
-  const dotRef = useRef(null);
-
-  const toggleActiveClass = () => {
-    dotRef.current.classList.toggle(styles.active);
-  };
 
   /**
    * Check to see if there exists a reference to the row of checkboxes in the steps context.
