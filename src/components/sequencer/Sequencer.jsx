@@ -37,19 +37,12 @@ export const Sequencer = () => {
                   }}
                 />
                 <div
+                  key={`${col}-${row}`}
                   id={`column-${col}-${row}`}
                   className={`${styles.overlay} ${
                     styles[samples[row].name]
-                  } pad`}>
-                  <div
-                    ref={(el) => {
-                      if (!el) return;
-                      dotRef.current = el;
-                    }}
-                    className={styles.dot}
-                    onClick={() => toggleActiveClass}
-                  />
-                </div>
+                  } pad`}
+                />
               </label>
             );
           })}
