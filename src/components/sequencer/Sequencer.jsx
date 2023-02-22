@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef } from "react";
 import { useSequenceContext } from "../../context/SequenceProvider";
 import styles from "./Sequencer.module.css";
 
