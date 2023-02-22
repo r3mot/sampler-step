@@ -1,11 +1,13 @@
 import React from "react";
-import { Sequencer } from "./components";
+import "./App.css";
+import { Sequencer, ControlPanel } from "./components";
 import { SequenceContextProvider } from "./context";
 
 const App = () => {
   return (
     <div className='App'>
       <SequenceContextProvider>
+        <ControlPanel />
         <Sequencer />
       </SequenceContextProvider>
     </div>

@@ -1,0 +1,10 @@
+.App {
+  background: rgb(31, 30, 32);
+  color: white;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
