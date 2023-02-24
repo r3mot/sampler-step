@@ -1,14 +1,11 @@
 .panel {
   background: rgb(31, 30, 32);
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   padding: 25px;
   gap: 50px;
-  /* border: 5px inset rgba(128, 127, 127, 0.603); */
-  /* border: 5px inset rgba(128, 127, 127, 0.603); */
   height: 50px;
   margin-bottom: 10px;
 }
