@@ -1,47 +1,14 @@
-import { useSequenceContext } from "../../context/SequenceProvider";
+import React from "react";
 import styles from "./Sequencer.module.css";
 
-export const Sequencer = () => {
-  const { numBeats, samples, steps } = useSequenceContext();
-  const rows = Array.from(Array(samples.length).keys());
-  const cols = Array.from(Array(numBeats).keys());
+import { Legend } from "../legend";
+import { Grid } from "../grid";
 
-  /**
-   * Check to see if there exists a reference to the row of checkboxes in the steps context.
-   * If not, create a new array for the row.
-   * Once the row exists, begin adding reference to each checkbox (column) in the row.
-   * This is done by using the ref attribute on the input element.
-   */
+export const Sequencer = () => {
   return (
-    <div className={styles.grid}>
-      {rows.map((row) => (
-        <div key={row} className={styles.row}>
-          {cols.map((col) => {
-            return (
-              <label>
-                <input
-                  className={styles.pad}
-                  type='checkbox'
-                  ref={(el) => {
-                    if (!el) return;
-                    if (!steps?.current[row]) {
-                      steps.current[row] = [];
-                    }
-                    steps.current[row][col] = el;
-                  }}
-                />
-                <div
-                  key={`${col}-${row}`}
-                  id={`column-${col}-${row}`}
-                  className={`${styles.overlay} ${
-                    styles[samples[row].name]
-                  } pad`}
-                />
-              </label>
-            );
-          })}
-        </div>
-      ))}
+    <div className={styles.sequencer}>
+      <Legend />
+      <Grid />
     </div>
   );
 };
