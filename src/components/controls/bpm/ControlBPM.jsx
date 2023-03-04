@@ -8,7 +8,7 @@ export const ControlBPM = () => {
   return (
     <div className={styles.wrapper}>
       <AiFillCaretLeft
-        size={35}
+        size={40}
         className={styles.button}
         onMouseDown={lowerTempo}
         onMouseUp={mouseUp}
@@ -17,7 +17,7 @@ export const ControlBPM = () => {
         <h2>{bpm}BPM</h2>
       </div>
       <AiFillCaretRight
-        size={35}
+        size={40}
         className={styles.button}
         onMouseDown={raiseTempo}
         onMouseUp={mouseUp}
