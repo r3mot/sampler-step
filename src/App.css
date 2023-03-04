@@ -14,3 +14,7 @@ body {
   box-sizing: border-box;
   background: rgb(31, 30, 32);
 }
+
+.sequencer {
+  display: flex;
+}

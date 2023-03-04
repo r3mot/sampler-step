@@ -11,9 +11,9 @@ import styles from "./ControlPanel.module.css";
  */
 export const ControlPanel = () => {
   return (
-    <section className={styles.panel}>
+    <div className={styles.panel}>
       <ControlButtons />
       <ControlBPM />
-    </section>
+    </div>
   );
 };
