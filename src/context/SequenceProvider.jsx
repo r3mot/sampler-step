@@ -6,15 +6,10 @@ import * as Tone from "tone";
 const SequenceContext = createContext();
 
 export const SequenceContextProvider = ({ children }) => {
-  // Number of beats in the sequence
   const [numBeats, setNumBeats] = useState(16);
-  // Tone.js samplers
   const samplers = useRef([]);
-  // Tone.js faders
   const faders = useRef([]);
-  // Array of steps
   const steps = useRef([[]]);
-  // Tone.js sequence
   const sequence = useRef(null);
 
   const stepOptions = [16, 32, 64];
@@ -25,26 +20,29 @@ export const SequenceContextProvider = ({ children }) => {
     faders.current.push(newFader);
   }
 
+  // Initialize samplers and sequence
+  samplers.current = initSamplers(samples);
+  sequence.current = initSequence(samplers, steps, numBeats);
+
+  // Connect samplers to faders
+  for (let i = 0; i < samplers.current.length; i++) {
+    samplers.current[i].sampler.connect(faders.current[i]);
+  }
+
+  // Start sequence on mount and stop on unmount
   useEffect(() => {
-    // Initialize samplers and sequence on mount
-    samplers.current = initSamplers(samples);
-    sequence.current = initSequence(samplers, steps, numBeats);
-
-    for (let i = 0; i < samplers.current.length; i++) {
-      samplers.current[i].sampler.connect(faders.current[i]);
-    }
-
-    // Start the sequence
     sequence.current.start(0);
 
-    // Stop the sequence on unmount
-    // and dispose of samplers
     return () => {
-      stop();
-      samplers.current.map((tone) => tone.sampler.dispose());
-      sequence.current.dispose();
+      // Check if samplers have been initialized
+      if (!samplers.current) {
+        // Stop sequence and dispose of samplers
+        sequence.current.stop();
+        sequence.current.dispose();
+        samplers.current.map((tone) => tone.sampler.dispose());
+      }
     };
-  }, [numBeats, samples]);
+  }, []);
 
   return (
     <SequenceContext.Provider

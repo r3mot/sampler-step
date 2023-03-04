@@ -4,7 +4,7 @@ import * as Tone from "tone";
  * Initializes the Tone.js sequencer
  * @param {*} samples - The samples to be used in the sequence
  */
-export const sampler = (sample) => {
+function sampler(sample) {
   const sampler = new Tone.Sampler({
     urls: {
       ["C4"]: sample.path,
@@ -14,18 +14,22 @@ export const sampler = (sample) => {
   // let channel = fader;
   // sampler.connect(channel);
   return sampler;
-};
+}
 
 /**
  *  Initializes the samplers and returns them to the caller
  * @param {*} samples - The samples to be used in the sequence
  */
-export const initSamplers = (samples) => {
+export function initSamplers(samples) {
   return samples.map((sample) => ({
     id: sample.id,
-    sampler: sampler(sample),
+    sampler: new Tone.Sampler({
+      urls: {
+        ["C4"]: sample.path,
+      },
+    }),
   }));
-};
+}
 
 /**
  *  Initializes the sequence and returns it to the caller
@@ -33,8 +37,7 @@ export const initSamplers = (samples) => {
  * @param {*} steps - The steps of the sequence
  * @param {*} numBeats - The number of steps in the sequence
  */
-export const initSequence = (samplers, steps, numBeats) => {
-  console.log("numbeats", numBeats);
+export function initSequence(samplers, steps, numBeats) {
   return new Tone.Sequence(
     (time, step) => {
       samplers.current.map((sample) => {
@@ -47,24 +50,24 @@ export const initSequence = (samplers, steps, numBeats) => {
     [...Array(numBeats).keys()],
     "8n"
   );
-};
+}
 
 let prevStep = -1;
 /**
  *  Shows the current step by setting the opacity of the current column to 0.5
  * @param {*} steps - The steps of the sequence
  * @param {*} step  - The current step
- * @uses - The id of the column is set to column-${step}-${rowId}
+ * @uses - The id of the column is set to ${step}-${rowId}
  * @uses - prevStep is used to reset the opacity of the previous column
  */
-const showSteps = (steps, step) => {
+function showSteps(steps, step) {
   Object.keys(steps.current).forEach((rowId) => {
     // Reset the opacity of the previous column
     if (prevStep >= 0) {
-      document.getElementById(`column-${prevStep}-${rowId}`).style.opacity = 1;
+      document.getElementById(`${prevStep}-${rowId}`).style.opacity = 1;
     }
     // Set the opacity of the current column
-    document.getElementById(`column-${step}-${rowId}`).style.opacity = 0.5;
+    document.getElementById(`${step}-${rowId}`).style.opacity = 0.2;
   });
   prevStep = step;
-};
+}
