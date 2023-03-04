@@ -1,5 +1,4 @@
-import { useSequenceContext } from "../../context/SequenceProvider";
-import { Legend } from "../legend";
+import { useSequenceContext } from "../../context";
 import styles from "./Grid.module.css";
 
 export const Grid = () => {
@@ -19,7 +18,7 @@ export const Grid = () => {
         <div key={row} className={styles.row}>
           {cols.map((col) => {
             return (
-              <label>
+              <label key={col} className={styles.col}>
                 <input
                   className={styles.pad}
                   type='checkbox'
