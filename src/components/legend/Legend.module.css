@@ -1,0 +1,62 @@
+.wrapper {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  user-select: none;
+}
+
+.track,
+.trackInitial {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background: rgb(31, 30, 32);
+  border: 2px solid black;
+  padding: 10px;
+  height: 100%;
+}
+
+.trackInitial {
+  height: 50px;
+}
+
+.left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  background: transparent;
+}
+
+.left h1 {
+  font-size: 1em;
+  color: rgb(150, 148, 148);
+  cursor: default;
+  text-transform: uppercase;
+}
+
+.right {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.right button {
+  font-size: 0.6em;
+  background: transparent;
+  color: rgb(150, 148, 148);
+  border: 1px solid rgb(150, 148, 148);
+  border-radius: 3px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.right button:hover {
+  background: rgb(150, 148, 148);
+  color: white;
+}
