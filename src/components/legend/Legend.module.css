@@ -4,6 +4,7 @@
   flex-direction: column;
   background: transparent;
   user-select: none;
+  border: 2px solid black;
 }
 
 .track,
@@ -28,6 +29,7 @@
   align-items: left;
   justify-content: center;
   background: transparent;
+  color: rgba(255, 91, 91, 0.699);
 }
 
 .left h1 {
@@ -47,7 +49,7 @@
 }
 
 .right button {
-  font-size: 0.6em;
+  font-size: 0.8em;
   background: transparent;
   color: rgb(150, 148, 148);
   border: 1px solid rgb(150, 148, 148);
