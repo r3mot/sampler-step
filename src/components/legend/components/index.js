@@ -1,1 +1,2 @@
-export * from "./MuteButton";
+export * from "./mute";
+export * from "./volume";
