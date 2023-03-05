@@ -65,9 +65,12 @@ const showSteps = (steps, step) => {
     // Reset the opacity of the previous column
     if (prevStep >= 0) {
       document.getElementById(`${prevStep}-${rowId}`).style.opacity = 1;
+      document.getElementById(`${prevStep}-${rowId}`).style.filter = "none";
     }
     // Set the opacity of the current column
     document.getElementById(`${step}-${rowId}`).style.opacity = 0.2;
+    document.getElementById(`${step}-${rowId}`).style.filter =
+      "drop-shadow(0 0 0.5rem black)";
   });
   prevStep = step;
 };

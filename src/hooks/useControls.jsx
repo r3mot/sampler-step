@@ -33,6 +33,7 @@ export const useControls = () => {
     const pads = document.querySelectorAll(".pad");
     pads.forEach((pad) => {
       pad.style.opacity = 1;
+      pad.style.filter = "none";
     });
 
     setIsPlaying(false);
