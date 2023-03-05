@@ -4,7 +4,7 @@ import * as Tone from "tone";
  * Initializes the Tone.js sequencer
  * @param {*} samples - The samples to be used in the sequence
  */
-function sampler(sample) {
+const sampler = (sample) => {
   const sampler = new Tone.Sampler({
     urls: {
       ["C4"]: sample.path,
@@ -14,13 +14,13 @@ function sampler(sample) {
   // let channel = fader;
   // sampler.connect(channel);
   return sampler;
-}
+};
 
 /**
  *  Initializes the samplers and returns them to the caller
  * @param {*} samples - The samples to be used in the sequence
  */
-export function initSamplers(samples) {
+export const initSamplers = (samples) => {
   return samples.map((sample) => ({
     id: sample.id,
     sampler: new Tone.Sampler({
@@ -29,7 +29,7 @@ export function initSamplers(samples) {
       },
     }),
   }));
-}
+};
 
 /**
  *  Initializes the sequence and returns it to the caller
@@ -37,7 +37,7 @@ export function initSamplers(samples) {
  * @param {*} steps - The steps of the sequence
  * @param {*} numBeats - The number of steps in the sequence
  */
-export function initSequence(samplers, steps, numBeats) {
+export const initSequence = (samplers, steps, numBeats) => {
   return new Tone.Sequence(
     (time, step) => {
       samplers.current.map((sample) => {
@@ -50,7 +50,7 @@ export function initSequence(samplers, steps, numBeats) {
     [...Array(numBeats).keys()],
     "8n"
   );
-}
+};
 
 let prevStep = -1;
 /**
@@ -60,7 +60,7 @@ let prevStep = -1;
  * @uses - The id of the column is set to ${step}-${rowId}
  * @uses - prevStep is used to reset the opacity of the previous column
  */
-function showSteps(steps, step) {
+const showSteps = (steps, step) => {
   Object.keys(steps.current).forEach((rowId) => {
     // Reset the opacity of the previous column
     if (prevStep >= 0) {
@@ -70,4 +70,4 @@ function showSteps(steps, step) {
     document.getElementById(`${step}-${rowId}`).style.opacity = 0.2;
   });
   prevStep = step;
-}
+};
