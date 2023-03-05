@@ -2,5 +2,8 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 500px;
+  min-height: 200px;
+  min-width: 500px;
+  border: 5px solid rgb(54, 53, 53);
+  border-radius: 5px;
 }
