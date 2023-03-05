@@ -1,64 +1,52 @@
-.wrapper {
-  width: 250px;
+* {
+  --border: 1px solid rgb(20, 20, 20);
+}
+
+.wrapper,
+.track {
   display: flex;
+}
+
+.wrapper {
+  width: 200px;
   flex-direction: column;
   background: transparent;
   user-select: none;
-  border: 2px solid black;
-}
-
-.track,
-.trackInitial {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  background: rgb(31, 30, 32);
-  border: 2px solid black;
-  padding: 10px;
   height: 100%;
 }
 
-.trackInitial {
-  height: 50px;
+.track {
+  height: 100%;
+  min-height: 40px;
+  min-width: 60px;
+  flex-direction: col;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(
+    to bottom,
+    rgb(32, 31, 31) 0%,
+
+    rgb(24, 24, 24) 100%
+  );
+
+  padding: 10px;
+  border-top: var(--border);
+  border-bottom: var(--border);
 }
 
-.left {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
-  background: transparent;
-  color: rgba(255, 91, 91, 0.699);
+.track:nth-child(1) {
+  border-top: none;
+  border-top-left-radius: 2px;
 }
 
-.left h1 {
-  font-size: 1em;
+.track:nth-last-child(1) {
+  border-bottom: none;
+  border-bottom-left-radius: 2px;
+}
+
+.track h1 {
   color: rgb(150, 148, 148);
   cursor: default;
   text-transform: uppercase;
-}
-
-.right {
-  width: 50%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-}
-
-.right button {
-  font-size: 0.8em;
-  background: transparent;
-  color: rgb(150, 148, 148);
-  border: 1px solid rgb(150, 148, 148);
-  border-radius: 3px;
-  padding: 3px;
-  cursor: pointer;
-}
-
-.right button:hover {
-  background: rgb(150, 148, 148);
-  color: white;
+  font-size: 90%;
 }

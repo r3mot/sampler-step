@@ -1,38 +1,70 @@
+* {
+  --bg-color: rgb(31, 30, 32);
+  --border: 1px solid rgb(20, 20, 20);
+  --min-height: 40px;
+}
+
 .grid {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: black;
-  border: 2px solid black;
+  height: 100%;
 }
 
 .row {
   display: flex;
   flex-direction: row;
   height: 100%;
+  min-height: var(--min-height);
+  padding: 10px 0px;
+  border-top: var(--border);
+  border-bottom: var(--border);
+  padding-right: 10px;
+  background: linear-gradient(
+    to bottom,
+    rgb(32, 31, 31) 0%,
+
+    rgb(24, 24, 24) 100%
+  );
+}
+
+.row:nth-child(1) {
+  border-top: none;
+}
+
+.row:nth-last-child(1) {
+  border-bottom: none;
 }
 
 .col {
   width: 100%;
-  padding: 2px;
-}
-
-.pad {
-  display: none;
+  padding: 2px 5px;
 }
 
 .overlay {
   height: 100%;
   width: 100%;
-  background: rgb(31, 30, 32);
+  background: #181818 linear-gradient(#2e2e2e, #181818);
+  border: 2px solid #222;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.pad {
+  display: none;
+}
+
+.pad ~ .muted {
+  opacity: 0.5;
+  filter: hue-rotate(180deg);
+}
+
 .pad:checked ~ .hat-cl {
-  background: radial-gradient(#bbdfb7, #6eb365);
+  background: radial-gradient(#1dff04, #447e44);
 }
 .pad:checked ~ .hat-op {
   background: radial-gradient(#dcdfb7, #b3a565);
@@ -53,8 +85,8 @@
   background: radial-gradient(#acb96f, #b3ae65, rgba(228, 235, 166, 0.582));
 }
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .grid {
     overflow-x: scroll;
   }
-}
+} */

@@ -1,0 +1,31 @@
+.active,
+.inactive {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.active {
+  background-image: url("../../../../assets/mute1.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  color: red;
+}
+
+.inactive {
+  background-image: url("../../../../assets/mic.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.muted {
+  filter: brightness(0.5);
+}
+
+@media screen and (max-width: 550px) {
+  .active,
+  .inactive {
+    width: 25px;
+    height: 25px;
+  }
+}
