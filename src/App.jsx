@@ -1,7 +1,7 @@
 import React from "react";
-import "./App.css";
 import { ControlPanel, Sequencer } from "./components";
 import { SequenceContextProvider } from "./context";
+import "./App.css";
 
 const App = () => {
   return (
