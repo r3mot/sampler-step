@@ -36,7 +36,7 @@ export const useControls = () => {
         beat.checked = false;
       }
     }
-
+    resetOverlay(document.querySelectorAll(".pad"));
     updateControls(false, true, true);
   };
 
@@ -61,6 +61,14 @@ export const useControls = () => {
 
   const resetFilters = (elements) => {
     for (let element of elements) {
+      element.style.opacity = 1;
+      element.style.filter = "none";
+    }
+  };
+
+  const resetOverlay = (elements) => {
+    for (let element of elements) {
+      element.style.background = "#181818 linear-gradient(#2e2e2e, #181818)";
       element.style.opacity = 1;
       element.style.filter = "none";
     }
