@@ -7,3 +7,9 @@
   border: 5px solid rgb(54, 53, 53);
   border-radius: 5px;
 }
+
+@media screen and (max-width: 768px) {
+  .sequencer {
+    min-width: none;
+  }
+}

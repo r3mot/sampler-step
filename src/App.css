@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 1200px;
 }
 
 body {
@@ -22,6 +23,6 @@ body {
 
 @media screen and (max-width: 1200px) {
   .App {
-    margin: 0 50px;
+    margin: 0 auto;
   }
 }

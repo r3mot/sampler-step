@@ -15,6 +15,12 @@
   height: 100%;
 }
 
+@media screen and (max-width: 768px) {
+  .wrapper {
+    width: 100px;
+  }
+}
+
 .track {
   height: 100%;
   min-height: 40px;
