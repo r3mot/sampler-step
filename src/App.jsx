@@ -10,6 +10,7 @@ const App = () => {
         <ControlPanel />
         <Sequencer />
       </SequenceContextProvider>
+      <h3>r3mot</h3>
     </div>
   );
 };
