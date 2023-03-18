@@ -8,7 +8,7 @@ import { useSequenceContext } from "../context/SequenceProvider";
  * @returns {Object} Object containing functions for starting, stopping, and clearing the sequencer.
  */
 export const useControls = () => {
-  const { sequence, steps, setStarted } = useSequenceContext();
+  const { sequence, steps } = useSequenceContext();
   const [controls, setControls] = useState({
     isPlaying: false,
     isStopped: true,
@@ -19,7 +19,6 @@ export const useControls = () => {
     if (Tone.Transport.state !== "started") {
       startSequence(sequence);
       updateControls(true, false, false);
-      setStarted(true);
     }
   };
 
@@ -28,7 +27,6 @@ export const useControls = () => {
       suspendSeqeuence(sequence);
       resetFilters(document.querySelectorAll(".pad"));
       updateControls(false, true, false);
-      setStarted(false);
     }
   };
 
@@ -40,7 +38,6 @@ export const useControls = () => {
     }
 
     updateControls(false, true, true);
-    setStarted(false);
   };
 
   const updateControls = (playing, stopped, cleared) => {
