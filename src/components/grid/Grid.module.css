@@ -67,7 +67,7 @@
   filter: hue-rotate(180deg);
 }
 
-.pad:checked ~ .hat-cl {
+/* .pad:checked ~ .hat-cl {
   background: radial-gradient(#1dff04, #447e44);
 }
 .pad:checked ~ .hat-op {
@@ -87,7 +87,7 @@
 }
 .pad:checked ~ .wobble {
   background: radial-gradient(#acb96f, #b3ae65, rgba(228, 235, 166, 0.582));
-}
+} */
 
 /* @media screen and (max-width: 768px) {
   .grid {

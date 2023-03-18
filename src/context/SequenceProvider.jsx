@@ -12,8 +12,6 @@ export const SequenceContextProvider = ({ children }) => {
   const steps = useRef([[]]);
   const sequence = useRef(null);
 
-  const stepOptions = [16, 32, 64];
-
   // Connect samplers to faders and meters
   for (let i = 0; i < samples.length; i++) {
     let newFader = new Tone.Volume(-12).toDestination();
@@ -54,7 +52,6 @@ export const SequenceContextProvider = ({ children }) => {
         steps,
         sequence,
         samples,
-        stepOptions,
       }}>
       {children}
     </SequenceContext.Provider>

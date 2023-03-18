@@ -6,6 +6,17 @@ export const Grid = () => {
   const rows = Array.from(Array(samples.length).keys());
   const cols = Array.from(Array(numBeats).keys());
 
+  const padClicked = (samples, row, col, e) => {
+    const pad = samples[row];
+    const color = pad.color;
+    const isChecked = steps.current[row][col].checked;
+
+    if (isChecked) {
+      e.target.style.background = "#181818 linear-gradient(#2e2e2e, #181818)";
+    } else {
+      e.target.style.background = samples[row].color;
+    }
+  };
   /**
    * Check to see if there exists a reference to the row of checkboxes in the steps context.
    * If not, create a new array for the row.
@@ -31,6 +42,7 @@ export const Grid = () => {
                   }}
                 />
                 <div
+                  onClick={(e) => padClicked(samples, row, col, e)}
                   key={`${col}-${row}`}
                   id={`${col}-${row}`}
                   className={`${styles.overlay} ${
