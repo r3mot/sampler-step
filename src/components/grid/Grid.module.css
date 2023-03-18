@@ -54,6 +54,10 @@
   align-items: center;
 }
 
+.overlay:hover {
+  border: 1px solid rgb(32, 192, 255);
+}
+
 .pad {
   display: none;
 }
