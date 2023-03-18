@@ -14,7 +14,8 @@ export const ControlBPM = () => {
         onMouseUp={handleMouseUp}
       />
       <div className={styles.box}>
-        <h2>{bpm}BPM</h2>
+        <div className={styles.boxBPM}>{bpm}</div>
+        <div className={styles.boxLabel}>BPM</div>
       </div>
       <AiFillCaretRight
         size={40}
