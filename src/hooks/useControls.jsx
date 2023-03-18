@@ -8,59 +8,73 @@ import { useSequenceContext } from "../context/SequenceProvider";
  * @returns {Object} Object containing functions for starting, stopping, and clearing the sequencer.
  */
 export const useControls = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isStopped, setIsStopped] = useState(true);
-  const [isCleared, setIsCleared] = useState(false);
+  const { sequence, steps, setStarted } = useSequenceContext();
+  const [controls, setControls] = useState({
+    isPlaying: false,
+    isStopped: true,
+    isCleared: false,
+  });
 
-  const { sequence, steps } = useSequenceContext();
-  // Start the sequencer
   const start = () => {
     if (Tone.Transport.state !== "started") {
-      sequence.current.context._context.resume();
-      Tone.Transport.start();
-      setIsPlaying(true);
-      setIsStopped(false);
-      setIsCleared(false);
+      startSequence(sequence);
+      updateControls(true, false, false);
+      setStarted(true);
     }
   };
 
-  // Stop the sequencer and reset the opacity of the pads
   const stop = () => {
     if (Tone.Transport.state === "started") {
-      sequence.current.context._context.suspend();
-      Tone.Transport.stop();
+      suspendSeqeuence(sequence);
+      resetFilters(document.querySelectorAll(".pad"));
+      updateControls(false, true, false);
+      setStarted(false);
     }
-    const pads = document.querySelectorAll(".pad");
-    pads.forEach((pad) => {
-      pad.style.opacity = 1;
-      pad.style.filter = "none";
-    });
-
-    setIsPlaying(false);
-    setIsStopped(true);
-    setIsCleared(false);
   };
 
-  // Clear the sequence and stop the sequencer
   const clear = () => {
-    steps.current.map((step) =>
-      step.map((beat) => {
+    for (let step of steps.current) {
+      for (let beat of step) {
         beat.checked = false;
-      })
-    );
+      }
+    }
 
-    setIsPlaying(false);
+    updateControls(false, true, true);
+    setStarted(false);
+  };
 
-    setIsCleared(true);
+  const updateControls = (playing, stopped, cleared) => {
+    setControls((prevControls) => ({
+      ...prevControls,
+      isPlaying: playing,
+      isStopped: stopped,
+      isCleared: cleared,
+    }));
+  };
+
+  const suspendSeqeuence = (sequence) => {
+    sequence.current.context._context.suspend();
+    Tone.Transport.stop();
+  };
+
+  const startSequence = (sequence) => {
+    sequence.current.context._context.resume();
+    Tone.Transport.start();
+  };
+
+  const resetFilters = (elements) => {
+    for (let element of elements) {
+      element.style.opacity = 1;
+      element.style.filter = "none";
+    }
   };
 
   useEffect(() => {
     setTimeout(() => {
-      setIsCleared(false);
+      updateControls(false, true, false);
       stop();
-      setIsStopped(true);
     }, 50);
-  }, [isCleared]);
+  }, [controls.isCleared]);
 
-  return { start, stop, clear, isPlaying, isCleared, isStopped };
+  return { start, stop, clear, controls };
 };
