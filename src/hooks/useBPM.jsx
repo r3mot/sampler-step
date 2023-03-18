@@ -14,11 +14,21 @@ export const useBPM = () => {
   const [bpm, setBpm] = useState(Tone.Transport.bpm.value);
   const [intervalId, setIntervalId] = useState(null);
 
+  /**
+   * Tone.Transport.bpm.value must be between 1 and 1000
+   * @param {number} delta - 1 or -1
+   * @returns updated bpm
+   */
   const updateBpm = (delta) => {
     setBpm((prevBpm) => {
       const newBpm = prevBpm + delta;
-      Tone.Transport.bpm.value = newBpm;
-      return newBpm;
+      if (newBpm === 0) stopInterval();
+      if (newBpm < 1 || newBpm > 1) {
+        Tone.Transport.bpm.value = newBpm;
+        return newBpm;
+      }
+
+      return prevBpm;
     });
   };
 
