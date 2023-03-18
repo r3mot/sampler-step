@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
 * {
   font-family: "Rubik", sans-serif;
 }
@@ -12,9 +14,23 @@
   max-width: 1200px;
 }
 
+.App h3 {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  color: white;
+  font-family: "Shadows Into Light", cursive;
+}
+
 body {
   box-sizing: border-box;
-  background: rgb(13, 14, 13);
+  background: linear-gradient(180deg, rgb(13, 14, 13) 50%, rgb(0, 0, 0) 100%);
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .sequencer {
