@@ -48,6 +48,6 @@ export const samples = [
 <ul> 
   <li><code>React</code> to manage the front-end of the application and increase the rate of development</li>
   <li><code>Tone.js</code> a web audio framework to create interactive music in the browser. Tone manages all of the control signals. </li>
-  <li><code>JavaScript</code> <i> will be moving the project over to TypeScript soon </li>
+  <li><code>JavaScript</code> <i> will be moving the project over to TypeScript soon </i></li>
   <li><code>Vite</code> used to handle tooling such as bundling</li>
 </ul>
