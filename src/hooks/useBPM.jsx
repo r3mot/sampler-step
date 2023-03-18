@@ -12,48 +12,47 @@ import * as Tone from "tone";
  */
 export const useBPM = () => {
   const [bpm, setBpm] = useState(Tone.Transport.bpm.value);
-  const [isMouseDown, setIsMouseDown] = useState(false);
-  const [isIncreasing, setIsIncreasing] = useState(false);
-  const [isDecreasing, setIsDecreasing] = useState(false);
+  const [intervalId, setIntervalId] = useState(null);
 
-  const raiseTempo = () => {
-    setBpm(bpm + 1);
-    setIsMouseDown(true);
-    setIsIncreasing(true);
+  const updateBpm = (delta) => {
+    setBpm((prevBpm) => {
+      const newBpm = prevBpm + delta;
+      Tone.Transport.bpm.value = newBpm;
+      return newBpm;
+    });
   };
 
-  const lowerTempo = () => {
-    setBpm(bpm - 1);
-    setIsMouseDown(true);
-    setIsDecreasing(true);
-  };
-
-  // allows for user to click and hold
-  // to increase or decrease the tempo
-  const mouseUp = () => {
-    clearInterval();
-    setIsMouseDown(false);
-    setIsIncreasing(false);
-    setIsDecreasing(false);
-  };
-
-  // cleanup function to clear the interval
-  // when the component unmounts
-  useEffect(() => {
-    if (isMouseDown) {
-      const interval = setInterval(() => {
-        if (isIncreasing) setBpm(bpm + 1);
-        if (isDecreasing) setBpm(bpm - 1);
-      }, 100);
-      return () => clearInterval(interval);
+  const startInterval = (delta) => {
+    if (intervalId) {
+      clearInterval(intervalId);
     }
-  }, [isMouseDown, bpm]);
 
-  // update the Tone.Transport.bpm.value
-  // when the bpm state changes
+    // only one interval at a time
+    const id = setInterval(() => updateBpm(delta), 100);
+    setIntervalId(id);
+  };
+
+  const stopInterval = () => {
+    if (intervalId) {
+      clearInterval(intervalId);
+      setIntervalId(null);
+    }
+  };
+
+  const handleMouseDown = (delta) => {
+    updateBpm(delta);
+    startInterval(delta);
+  };
+
+  const handleMouseUp = () => {
+    stopInterval();
+  };
+
   useEffect(() => {
-    Tone.Transport.bpm.value = bpm;
-  }, [bpm]);
+    return () => {
+      stopInterval();
+    };
+  }, []);
 
-  return { bpm, raiseTempo, lowerTempo, mouseUp };
+  return { bpm, handleMouseDown, handleMouseUp };
 };
