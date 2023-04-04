@@ -1,4 +1,4 @@
-# <p align="center">[Step Sequencer](https://step-sequencer-2b6a2.web.app)</p>
+# <p align="center">[Step Sequencer](https://https://sequencer.coreymendrella.dev)</p>
 
 A simple step sequencer that leverages the [Tone.js](https://tonejs.github.io) API and React to provide a fun experience without a DAW.
 
