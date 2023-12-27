@@ -13,7 +13,7 @@ dist-ssr
 *.local
 
 # firebase
-
+# need to keep firebase.json for firebase deploy
 .firebaserc
 
 
