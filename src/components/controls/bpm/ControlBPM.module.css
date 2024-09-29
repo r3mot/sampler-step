@@ -24,16 +24,30 @@
   user-select: none;
 }
 
-.boxBPM,
+.boxInput {
+  width: 50%;
+  background: transparent;
+  border: none;
+  color: rgb(32, 192, 255);
+  font-size: 1.2rem;
+  text-align: center;
+  /* Hide the arrows */
+  -moz-appearance: textfield;
+}
+
+.boxInput::-webkit-outer-spin-button,
+.boxInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.boxInput:focus {
+  outline: none;
+}
+
 .boxLabel {
   text-align: center;
   width: 50%;
-}
-
-.box h1 {
-  color: white;
-  font-size: 1rem;
-  margin: 0;
 }
 
 .button {

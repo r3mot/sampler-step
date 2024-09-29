@@ -3,7 +3,7 @@ import { useBPM } from "../../../hooks/useBPM";
 import styles from "./ControlBPM.module.css";
 
 export const ControlBPM = () => {
-  const { bpm, handleMouseDown, handleMouseUp } = useBPM();
+  const { bpm, handleMouseDown, handleMouseUp, handleInputChange } = useBPM();
 
   return (
     <div className={styles.wrapper}>
@@ -14,7 +14,14 @@ export const ControlBPM = () => {
         onMouseUp={handleMouseUp}
       />
       <div className={styles.box}>
-        <div className={styles.boxBPM}>{bpm}</div>
+        <input
+          type="number"
+          className={styles.boxInput}
+          value={bpm}
+          onChange={handleInputChange}
+          min="1"
+          max="1000"
+        />
         <div className={styles.boxLabel}>BPM</div>
       </div>
       <AiFillCaretRight
