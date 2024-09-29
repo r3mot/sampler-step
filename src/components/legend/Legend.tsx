@@ -1,13 +1,12 @@
-// @ts-nocheck
-
-import { useSequenceContext } from "../../context/index.js";
 import { samples } from "../../data/samples.js";
+import { useSequence } from "../../hooks/useSequence.ts";
 
 import { MuteButton } from "./components/mute/MuteButton.tsx";
 import styles from "./Legend.module.css";
 
 export const Legend = () => {
-  const { samplers } = useSequenceContext();
+  // @ts-ignore
+  const { samplers } = useSequence();
   return (
     <div className={styles.wrapper}>
       {samples.map((sample: any) => (

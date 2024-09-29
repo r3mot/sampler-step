@@ -1,9 +1,9 @@
-// @ts-ignore
-import { useSequenceContext } from "../../context";
+import { useSequence } from "../../hooks/useSequence";
 import styles from "./Grid.module.css";
 
 export const Grid = () => {
-  const { numBeats, samples, steps } = useSequenceContext();
+  // @ts-ignore
+  const { numBeats, samples, steps } = useSequence();
   const rows = Array.from(Array(samples.length).keys());
   const cols = Array.from(Array(numBeats).keys());
 
