@@ -5,7 +5,7 @@ import {
   SamplerInternal,
   SequenceInternal,
   StepInternal,
-} from "../types";
+} from "@/types";
 import {
   createContext,
   RefObject,
@@ -14,7 +14,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { samples } from "../data/samples";
+import { samples } from "@/data/samples";
 
 interface SequenceContextProps {
   samplers: RefObject<SamplerInternal[]>;
