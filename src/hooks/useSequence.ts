@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SequenceContext } from "../context/SequenceProvider";
+import { SequenceContext } from "@/context/SequenceProvider";
 import * as Tone from "tone";
 
 export const useSequence = () => {
