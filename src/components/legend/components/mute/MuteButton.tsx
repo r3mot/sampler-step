@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaderInternal, StepInternal } from "@/types";
-import styles from "./Mutebutton.module.css";
+import styles from "./MuteButton.module.css";
 
 interface Props {
   fader: FaderInternal | null;
