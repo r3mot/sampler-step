@@ -1,7 +1,7 @@
 import { useSequenceContext } from "../../context";
 import { samples } from "../../data";
 
-import { MuteButton } from "./components/mute/MuteButton";
+import { MuteButton } from "./components/mute/MuteButton.tsx";
 import styles from "./Legend.module.css";
 
 export const Legend = () => {
