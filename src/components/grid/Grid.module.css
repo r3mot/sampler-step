@@ -67,6 +67,11 @@
   filter: hue-rotate(180deg);
 }
 
+.overlay.active {
+  opacity: 0.2;
+  filter: drop-shadow(0 0 0.5rem black);
+}
+
 /* .pad:checked ~ .hat-cl {
   background: radial-gradient(#1dff04, #447e44);
 }
