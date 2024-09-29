@@ -19,7 +19,7 @@ export const useBPM = () => {
    * @param {number} delta - 1 or -1
    * @returns updated bpm
    */
-  const updateBpm = (delta) => {
+  const updateBpm = (delta: any) => {
     setBpm((prevBpm) => {
       const newBpm = prevBpm + delta;
       if (newBpm === 0) stopInterval();
@@ -32,13 +32,13 @@ export const useBPM = () => {
     });
   };
 
-  const startInterval = (delta) => {
+  const startInterval = (delta: any) => {
     if (intervalId) {
       clearInterval(intervalId);
     }
 
     // only one interval at a time
-    const id = setInterval(() => updateBpm(delta), 100);
+    const id = setInterval(() => updateBpm(delta), 100) as any;
     setIntervalId(id);
   };
 
@@ -49,7 +49,7 @@ export const useBPM = () => {
     }
   };
 
-  const handleMouseDown = (delta) => {
+  const handleMouseDown = (delta: any) => {
     updateBpm(delta);
     startInterval(delta);
   };

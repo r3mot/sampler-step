@@ -1,5 +1,6 @@
 import * as Tone from "tone";
 import { useState, useEffect } from "react";
+// @ts-ignore
 import { useSequenceContext } from "../context/SequenceProvider";
 
 /**
@@ -40,7 +41,7 @@ export const useControls = () => {
     updateControls(false, true, true);
   };
 
-  const updateControls = (playing, stopped, cleared) => {
+  const updateControls = (playing: any, stopped: any, cleared: any) => {
     setControls((prevControls) => ({
       ...prevControls,
       isPlaying: playing,
@@ -49,24 +50,24 @@ export const useControls = () => {
     }));
   };
 
-  const suspendSeqeuence = (sequence) => {
+  const suspendSeqeuence = (sequence: any) => {
     sequence.current.context._context.suspend();
     Tone.Transport.stop();
   };
 
-  const startSequence = (sequence) => {
+  const startSequence = (sequence: any) => {
     sequence.current.context._context.resume();
     Tone.Transport.start();
   };
 
-  const resetFilters = (elements) => {
+  const resetFilters = (elements: any) => {
     for (let element of elements) {
       element.style.opacity = 1;
       element.style.filter = "none";
     }
   };
 
-  const resetOverlay = (elements) => {
+  const resetOverlay = (elements: any) => {
     for (let element of elements) {
       element.style.background = "#181818 linear-gradient(#2e2e2e, #181818)";
       element.style.opacity = 1;
