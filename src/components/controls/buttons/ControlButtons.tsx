@@ -9,7 +9,7 @@ import styles from "./ControlButtons.module.css";
 export const ControlButtons = () => {
   const { start, stop, clear, controls } = useControls();
 
-  const getButtonStyle = (state, color) => ({
+  const getButtonStyle = (state: any, color: any) => ({
     ...(state ? { color, border: `2px solid ${color}` } : {}),
   });
 
