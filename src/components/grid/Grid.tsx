@@ -1,3 +1,4 @@
+// @ts-ignore
 import { useSequenceContext } from "../../context";
 import styles from "./Grid.module.css";
 
@@ -6,7 +7,7 @@ export const Grid = () => {
   const rows = Array.from(Array(samples.length).keys());
   const cols = Array.from(Array(numBeats).keys());
 
-  const padClicked = (samples, row, col, e) => {
+  const padClicked = (samples: any, row: any, col: any, e: any) => {
     const pad = samples[row];
     const color = pad.color;
     const isChecked = steps.current[row][col].checked;
@@ -32,7 +33,7 @@ export const Grid = () => {
               <label key={col} className={styles.col}>
                 <input
                   className={styles.pad}
-                  type='checkbox'
+                  type="checkbox"
                   ref={(el) => {
                     if (!el) return;
                     if (!steps?.current[row]) {
