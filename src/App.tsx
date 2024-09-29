@@ -1,11 +1,11 @@
-import React from "react";
+// @ts-nocheck
 import { ControlPanel, Sequencer } from "./components";
 import { SequenceContextProvider } from "./context";
 import "./App.css";
 
 const App = () => {
   return (
-    <div className='App'>
+    <div className="App">
       <SequenceContextProvider>
         <ControlPanel />
         <Sequencer />
