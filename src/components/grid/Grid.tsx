@@ -1,5 +1,5 @@
-import { useSequence } from "../../hooks/useSequence";
-import { SampleInternal } from "../../types";
+import { useSequence } from "@/hooks/useSequence";
+import { SampleInternal } from "@/types";
 import styles from "./Grid.module.css";
 
 export const Grid = () => {

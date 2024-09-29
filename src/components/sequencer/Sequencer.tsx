@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Sequencer.module.css";
 import { Legend } from "../legend";
-import { Grid } from "../grid";
+import { Grid } from "@/components/grid/Grid";
 
 export const Sequencer = () => {
   return (
