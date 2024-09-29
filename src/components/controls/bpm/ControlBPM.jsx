@@ -1,5 +1,5 @@
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
-import { useBPM } from "../../../hooks/useBPM";
+import { useBPM } from "../../../hooks/useBPM.tsx";
 import styles from "./ControlBPM.module.css";
 
 export const ControlBPM = () => {

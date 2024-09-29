@@ -1,6 +1,6 @@
 import { IoPlay, IoStop } from "react-icons/io5";
 import { BiReset } from "react-icons/bi";
-import { useControls } from "../../../hooks/useControls";
+import { useControls } from "../../../hooks/useControls.tsx";
 import styles from "./ControlButtons.module.css";
 /**
  * Buttons for starting, stopping, and clearing the sequencer.<br>
