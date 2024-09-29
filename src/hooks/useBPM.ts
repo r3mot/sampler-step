@@ -3,7 +3,7 @@ import * as Tone from "tone";
 
 export const useBPM = () => {
   const [bpm, setBpm] = useState(Tone.getTransport().bpm.value);
-  const [intervalId, setIntervalId] = useState(0);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   const updateBpm = (newBpm: number) => {
     if (newBpm < 1 || newBpm > 1000) return; // Ensure BPM stays within valid range
@@ -23,7 +23,7 @@ export const useBPM = () => {
   const stopInterval = () => {
     if (intervalId) {
       clearInterval(intervalId);
-      setIntervalId(0);
+      setIntervalId(null);
     }
   };
 
