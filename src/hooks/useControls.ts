@@ -31,30 +31,32 @@ export function useControls() {
     }
   }
 
-  function clearGrid() {
+  async function clearGrid() {
     if (steps.current) {
       for (const step of steps.current) {
         for (const element of step) {
-          element.checked = false;
+          if (element) {
+            element.checked = false;
+
+            const overlayElement = element.nextElementSibling;
+            if (overlayElement) {
+              resetOverlay(overlayElement as HTMLElement);
+            }
+          }
         }
       }
 
-      resetOverlay(
-        steps.current.flat().filter((el): el is HTMLInputElement => el !== null)
-      );
+      await stopSequence();
     }
   }
 
-  const resetFilters = (elements: HTMLInputElement[]) => {
-    for (const element of elements) {
-      element.style.opacity = "1";
-      element.style.filter = "none";
-    }
+  const resetOverlay = (overlayElement: HTMLElement) => {
+    overlayElement.style.background =
+      "#181818 linear-gradient(#2e2e2e, #181818)";
   };
 
-  const resetOverlay = (elements: HTMLInputElement[]) => {
+  const resetFilters = (elements: HTMLInputElement[]) => {
     for (const element of elements) {
-      element.style.background = "#181818 linear-gradient(#2e2e2e, #181818)";
       element.style.opacity = "1";
       element.style.filter = "none";
     }
