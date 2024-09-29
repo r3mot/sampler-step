@@ -2,6 +2,7 @@ import * as Tone from "tone";
 import { useState, useEffect } from "react";
 // @ts-ignore
 import { useSequenceContext } from "../context/SequenceProvider";
+import { useSequence } from "./useSequence";
 
 /**
  * @description - Custom hook that returns functions for starting, stopping, and clearing the sequencer.<br>
@@ -9,7 +10,8 @@ import { useSequenceContext } from "../context/SequenceProvider";
  * @returns {Object} Object containing functions for starting, stopping, and clearing the sequencer.
  */
 export const useControls = () => {
-  const { sequence, steps } = useSequenceContext();
+  //@ts-ignore
+  const { sequence, steps } = useSequence();
   const [controls, setControls] = useState({
     isPlaying: false,
     isStopped: true,
