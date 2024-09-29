@@ -1,9 +1,11 @@
+// @ts-nocheck
+
 import { createContext, useRef, useState, useContext, useEffect } from "react";
 import { initSamplers, initSequence } from "../utility";
 import { samples } from "../data";
 import * as Tone from "tone";
 
-const SequenceContext = createContext();
+export const SequenceContext = createContext();
 
 export const SequenceContextProvider = ({ children }) => {
   const [numBeats, setNumBeats] = useState(16);
@@ -52,7 +54,8 @@ export const SequenceContextProvider = ({ children }) => {
         steps,
         sequence,
         samples,
-      }}>
+      }}
+    >
       {children}
     </SequenceContext.Provider>
   );
