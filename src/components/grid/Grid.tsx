@@ -1,34 +1,34 @@
 import { useSequence } from "../../hooks/useSequence";
+import { SampleInternal } from "../../types";
 import styles from "./Grid.module.css";
 
 export const Grid = () => {
-  // @ts-ignore
-  const { numBeats, samples, steps } = useSequence();
+  const { numBeats, samples, steps, currentStep } = useSequence();
   const rows = Array.from(Array(samples.length).keys());
   const cols = Array.from(Array(numBeats).keys());
 
-  const padClicked = (samples: any, row: any, col: any, e: any) => {
-    const pad = samples[row];
-    const color = pad.color;
-    const isChecked = steps.current[row][col].checked;
+  const padClicked = (
+    samples: SampleInternal[],
+    row: number,
+    col: number,
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    const isChecked = steps.current ? steps.current[row][col].checked : false;
 
     if (isChecked) {
-      e.target.style.background = "#181818 linear-gradient(#2e2e2e, #181818)";
+      (e.target as HTMLElement).style.background =
+        "#181818 linear-gradient(#2e2e2e, #181818)";
     } else {
-      e.target.style.background = samples[row].color;
+      (e.target as HTMLElement).style.background = samples[row].color;
     }
   };
-  /**
-   * Check to see if there exists a reference to the row of checkboxes in the steps context.
-   * If not, create a new array for the row.
-   * Once the row exists, begin adding reference to each checkbox (column) in the row.
-   * This is done by using the ref attribute on the input element.
-   */
+
   return (
     <div className={styles.grid}>
       {rows.map((row) => (
         <div key={row} className={styles.row}>
           {cols.map((col) => {
+            const isActive = currentStep === col;
             return (
               <label key={col} className={styles.col}>
                 <input
@@ -36,10 +36,12 @@ export const Grid = () => {
                   type="checkbox"
                   ref={(el) => {
                     if (!el) return;
-                    if (!steps?.current[row]) {
+                    if (steps.current && !steps.current[row]) {
                       steps.current[row] = [];
                     }
-                    steps.current[row][col] = el;
+                    if (steps.current) {
+                      steps.current[row][col] = el;
+                    }
                   }}
                 />
                 <div
@@ -48,7 +50,7 @@ export const Grid = () => {
                   id={`${col}-${row}`}
                   className={`${styles.overlay} ${
                     styles[samples[row].name]
-                  } pad`}
+                  } pad ${isActive ? styles.active : ""}`}
                 />
               </label>
             );

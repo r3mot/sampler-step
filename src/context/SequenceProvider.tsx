@@ -1,48 +1,94 @@
-// @ts-nocheck
+import { Sampler, Sequence, Volume } from "tone";
+import {
+  FaderInternal,
+  SampleInternal,
+  SamplerInternal,
+  SequenceInternal,
+  StepInternal,
+} from "../types";
+import {
+  createContext,
+  RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { samples } from "../data/samples";
 
-import { createContext, useRef, useState, useContext, useEffect } from "react";
-import { initSamplers, initSequence } from "../utility";
-import { samples } from "../data";
-import * as Tone from "tone";
+interface SequenceContextProps {
+  samplers: RefObject<SamplerInternal[]>;
+  steps: RefObject<StepInternal[]>;
+  faders: RefObject<FaderInternal[]>;
+  sequence: RefObject<SequenceInternal>;
+  numBeats: number;
+  setNumBeats: React.Dispatch<React.SetStateAction<number>>;
+  samples: SampleInternal[];
+  currentStep: number;
+}
 
-export const SequenceContext = createContext();
+export const SequenceContext = createContext<SequenceContextProps | undefined>(
+  undefined
+);
 
-export const SequenceContextProvider = ({ children }) => {
+export function SequenceContextProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [numBeats, setNumBeats] = useState(16);
-  const samplers = useRef([]);
-  const faders = useRef([]);
-  const steps = useRef([[]]);
-  const sequence = useRef(null);
+  const [currentStep, setCurrentStep] = useState(-1);
+  const samplers = useRef<SamplerInternal[]>([]);
+  const steps = useRef<StepInternal[]>([]);
+  const faders = useRef<FaderInternal[]>([]);
+  const sequence = useRef<SequenceInternal>(null);
 
-  // Connect samplers to faders and meters
-  for (let i = 0; i < samples.length; i++) {
-    let newFader = new Tone.Volume(-12).toDestination();
-    faders.current.push(newFader);
-  }
+  const showSteps = useCallback((step: number) => {
+    setCurrentStep(step);
+  }, []);
 
-  // Initialize samplers and sequence
-  samplers.current = initSamplers(samples);
-  sequence.current = initSequence(samplers, steps, numBeats);
+  const initSamplers = useCallback(() => {
+    return samples.map((sample) => ({
+      id: sample.id,
+      sampler: new Sampler({
+        urls: { ["C4"]: sample.path },
+      }),
+    }));
+  }, []);
 
-  // Connect samplers to faders
-  for (let i = 0; i < samplers.current.length; i++) {
-    samplers.current[i].sampler.connect(faders.current[i]);
-  }
+  const initSequence = useCallback(() => {
+    return new Sequence(
+      (time, step) => {
+        samplers.current.forEach((sample) => {
+          if (steps.current[sample.id][step]?.checked) {
+            sample.sampler.triggerAttack("C4", time);
+          }
+        });
+        showSteps(step);
+      },
+      [...Array(numBeats).keys()],
+      "8n"
+    );
+  }, [numBeats, showSteps]);
 
-  // Start sequence on mount and stop on unmount
+  const initFaders = useCallback(() => {
+    return samplers.current.map((sampler) => {
+      const fader = new Volume(-12).toDestination();
+      sampler.sampler.connect(fader);
+      return fader;
+    });
+  }, []);
+
   useEffect(() => {
-    sequence.current.start(0);
+    samplers.current = initSamplers();
+    sequence.current = initSequence();
+    faders.current = initFaders();
 
     return () => {
-      // Check if samplers have been initialized
-      if (!samplers.current) {
-        // Stop sequence and dispose of samplers
-        sequence.current.stop();
-        sequence.current.dispose();
-        samplers.current.map((tone) => tone.sampler.dispose());
-      }
+      sequence?.current?.dispose();
+      samplers.current.forEach((sampler) => sampler.sampler.dispose());
     };
-  }, []);
+  }, [initSamplers, initSequence, initFaders]);
 
   return (
     <SequenceContext.Provider
@@ -54,12 +100,10 @@ export const SequenceContextProvider = ({ children }) => {
         steps,
         sequence,
         samples,
+        currentStep,
       }}
     >
       {children}
     </SequenceContext.Provider>
   );
-};
-
-// Global context hook
-export const useSequenceContext = () => useContext(SequenceContext);
+}
