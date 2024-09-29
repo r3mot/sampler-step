@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { SequenceContext } from "../context/SequenceProvider";
+import * as Tone from "tone";
 
 export const useSequence = () => {
   const context = useContext(SequenceContext);
@@ -8,5 +9,16 @@ export const useSequence = () => {
     throw new Error("useSequence must be used within a SequenceProvider");
   }
 
-  return context;
+  async function startTransport() {
+    await Tone.start();
+    Tone.getTransport().start();
+    context?.sequence.current?.start();
+  }
+
+  async function stopTransport() {
+    Tone.getTransport().stop();
+    context?.sequence.current?.stop();
+  }
+
+  return { ...context, startTransport, stopTransport };
 };
