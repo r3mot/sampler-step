@@ -1,5 +1,5 @@
-import { ControlBPM } from "./bpm";
-import { ControlButtons } from "./buttons";
+import { ControlBPM } from "@/components/controls/bpm/ControlBPM";
+import { ControlButtons } from "@/components/controls/buttons/ControlButtons";
 import styles from "./ControlPanel.module.css";
 
 /**

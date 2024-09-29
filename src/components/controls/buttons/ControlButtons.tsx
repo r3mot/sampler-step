@@ -1,7 +1,7 @@
 import { IoPlay, IoStop } from "react-icons/io5";
 import { BiReset } from "react-icons/bi";
 import styles from "./ControlButtons.module.css";
-import { useControls } from "../../../hooks";
+import { useControls } from "@/hooks";
 
 export function ControlButtons() {
   const { startSequence, stopSequence, clearGrid, controls } = useControls();
