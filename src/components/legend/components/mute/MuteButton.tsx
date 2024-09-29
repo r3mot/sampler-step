@@ -1,26 +1,39 @@
 import { useState } from "react";
+import { FaderInternal, StepInternal } from "../../../../types";
+import styles from "./Mutebutton.module.css";
 
-import styles from "./MuteButton.module.css";
-import { useSequence } from "../../../../hooks/useSequence";
+interface Props {
+  fader: FaderInternal | null;
+  id: number;
+  steps: StepInternal[] | null;
+}
 
-export const MuteButton = ({ sampler, id }: any) => {
-  const [isMuted, setIsMuted] = useState(false);
-  //@ts-ignore
-  const { steps } = useSequence();
+export function MuteButton({ fader, id, steps }: Props) {
+  const [muted, setMuted] = useState(false);
 
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
-    sampler._volume.mute = !sampler._volume.mute;
+  function toggleMute() {
+    setMuted((prevMuted) => {
+      if (fader && steps) {
+        const newVolume = prevMuted ? -12 : -100;
+        fader.volume.value = newVolume;
 
-    steps.current[id].forEach((step: any) => {
-      step.parentNode.classList.toggle(styles.muted);
+        steps[id].forEach((step) => {
+          if (step.parentNode) {
+            (step.parentNode as HTMLElement).classList.toggle(
+              styles.muted,
+              !prevMuted
+            );
+          }
+        });
+      }
+      return !prevMuted;
     });
-  };
+  }
 
   return (
     <div
-      className={isMuted ? styles.active : styles.inactive}
+      className={muted ? styles.active : styles.inactive}
       onClick={toggleMute}
     />
   );
-};
+}
