@@ -1,5 +1,6 @@
 // @ts-nocheck
-import { ControlPanel, Sequencer } from "./components";
+import { ControlPanel } from "@/components/controls/ControlPanel";
+import { Sequencer } from "./components";
 import { SequenceContextProvider } from "./context";
 import "./App.css";
 
