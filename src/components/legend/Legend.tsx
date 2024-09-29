@@ -1,6 +1,6 @@
-import { useSequence } from "../../hooks/useSequence.ts";
+import { useSequence } from "@/hooks/useSequence";
 
-import { MuteButton } from "./components/mute/MuteButton.tsx";
+import { MuteButton } from "@/components/legend/components/mute/MuteButton";
 import styles from "./Legend.module.css";
 
 export const Legend = () => {
