@@ -1,7 +1,8 @@
 // @ts-nocheck
 import { ControlPanel } from "@/components/controls/ControlPanel";
-import { Sequencer } from "./components";
-import { SequenceContextProvider } from "./context";
+import { SequenceContextProvider } from "@/context/SequenceProvider";
+import { Sequencer } from "@/components/sequencer/Sequencer";
+
 import "./App.css";
 
 const App = () => {
