@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { ControlPanel } from "@/components/controls/ControlPanel";
 import { SequenceContextProvider } from "@/context/SequenceProvider";
 import { Sequencer } from "@/components/sequencer/Sequencer";
