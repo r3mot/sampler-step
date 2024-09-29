@@ -71,31 +71,3 @@
   opacity: 0.2;
   filter: drop-shadow(0 0 0.5rem black);
 }
-
-/* .pad:checked ~ .hat-cl {
-  background: radial-gradient(#1dff04, #447e44);
-}
-.pad:checked ~ .hat-op {
-  background: radial-gradient(#dcdfb7, #b3a565);
-}
-.pad:checked ~ .kick {
-  background: radial-gradient(#b7c2df, #657ab3);
-}
-.pad:checked ~ .snare {
-  background: radial-gradient(#cfb7df, #9665b3);
-}
-.pad:checked ~ .clap {
-  background: radial-gradient(#dfb7c4, #b36569);
-}
-.pad:checked ~ .shaker {
-  background: radial-gradient(#84ee78, #65b37c);
-}
-.pad:checked ~ .wobble {
-  background: radial-gradient(#acb96f, #b3ae65, rgba(228, 235, 166, 0.582));
-} */
-
-/* @media screen and (max-width: 768px) {
-  .grid {
-    overflow-x: scroll;
-  }
-} */
