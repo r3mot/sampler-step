@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaderInternal, StepInternal } from "../../../../types";
+import { FaderInternal, StepInternal } from "@/types";
 import styles from "./Mutebutton.module.css";
 
 interface Props {
