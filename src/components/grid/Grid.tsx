@@ -2,10 +2,101 @@ import { useSequence } from "@/hooks/useSequence";
 import { SampleInternal } from "@/types";
 import styles from "./Grid.module.css";
 
+const initialPattern = [
+  [
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+];
+
 export const Grid = () => {
-  const { numBeats, samples, steps, currentStep } = useSequence();
-  const rows = Array.from(Array(samples.length).keys());
-  const cols = Array.from(Array(numBeats).keys());
+  const { samples, steps, currentStep } = useSequence();
 
   const padClicked = (
     samples: SampleInternal[],
@@ -25,15 +116,16 @@ export const Grid = () => {
 
   return (
     <div className={styles.grid}>
-      {rows.map((row) => (
+      {initialPattern.map((rowPattern, row) => (
         <div key={row} className={styles.row}>
-          {cols.map((col) => {
+          {rowPattern.map((isChecked, col) => {
             const isActive = currentStep === col;
             return (
               <label key={col} className={styles.col}>
                 <input
                   className={styles.pad}
                   type="checkbox"
+                  defaultChecked={isChecked}
                   ref={(el) => {
                     if (!el) return;
                     if (steps.current && !steps.current[row]) {
@@ -45,6 +137,7 @@ export const Grid = () => {
                   }}
                 />
                 <div
+                  style={isChecked ? { background: samples[row].color } : {}}
                   onClick={(e) => padClicked(samples, row, col, e)}
                   key={`${col}-${row}`}
                   id={`${col}-${row}`}
