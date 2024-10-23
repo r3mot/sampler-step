@@ -42,6 +42,7 @@ export function SequenceContextProvider({
   const steps = useRef<StepInternal[]>([]);
   const faders = useRef<FaderInternal[]>([]);
   const sequence = useRef<SequenceInternal>(null);
+  const stepTiming = "16n";
 
   const showSteps = useCallback((step: number) => {
     setCurrentStep(step);
@@ -67,7 +68,7 @@ export function SequenceContextProvider({
         showSteps(step);
       },
       [...Array(numBeats).keys()],
-      "8n"
+      stepTiming
     );
   }, [numBeats, showSteps]);
 
