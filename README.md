@@ -1,5 +1,7 @@
 # Sampler Step
 
+> This project is no longer active. You can find the newest step sequencer here -> [Grid Groovin](https://github.com/r3mot/grid-groove)
+
 A simple step sequencer that leverages the [Tone.js](https://tonejs.github.io) API and React. It features 4 pre-selected samples and a 16-beat (4/4) pattern. Just click on a cell to create your pattern and press play!
 
 ![grid groovin demo](https://user-images.githubusercontent.com/88360543/226132825-2661fe64-b8ae-43b3-af2b-a8520cd50a87.gif)
