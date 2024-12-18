@@ -1,4 +1,4 @@
-# [Grid Groovin](https://www.gridgroovin.com)
+# Sampler Step
 
 A simple step sequencer that leverages the [Tone.js](https://tonejs.github.io) API and React. It features 4 pre-selected samples and a 16-beat (4/4) pattern. Just click on a cell to create your pattern and press play!
 
